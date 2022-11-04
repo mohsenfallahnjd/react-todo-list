@@ -1,0 +1,69 @@
+// -------------------------------------------------------------------------- //
+// Home module
+// -------------------------------------------------------------------------- //
+
+.m-home {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-height: calc(100vh - 2rem);
+    margin: 1rem;
+    padding: 1rem;
+    border: 3px solid #CCCCCC;
+    text-align: center;
+
+    &__board-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0;
+    }
+
+    .c-board-card {
+        &-wrapper {
+            display: flex;
+            flex: 1 1 20%;
+            max-width: 20%;
+            margin: 20px 0;
+            padding: 0 15px;
+
+            @media screen and (max-width: 768px) {
+                flex: 1 1 100%;
+            }
+        }
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        width: 100%;
+        height: 80px;
+        padding: 15px;
+        border: 1px dashed gray;
+        border-radius: 10px;
+
+        &--new {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+
+            .c-board-card__button {
+                cursor: pointer;
+
+                &--create {
+                    width: 100%;
+                    height: 78px;
+                    border: none;
+                    border-radius: 10px;
+                }
+
+                &--add {
+                    width: fit-content;
+                    margin: 8px 3px 0;
+                }
+            }
+        }
+    }
+}
