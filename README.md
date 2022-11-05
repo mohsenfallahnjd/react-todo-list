@@ -1,6 +1,6 @@
 # The Simple Todo list
 
-This to-do list app, used from ... .
+This to-do list app, used from some tools :smile: .
 
 ## Development
 

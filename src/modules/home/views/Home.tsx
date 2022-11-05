@@ -38,7 +38,12 @@ export const Home: React.FC = () => {
             const data: {[k:string]: any} = {
                 id   : uuid(),
                 title: cardTitle,
-                items: [],
+                items: [
+                    { id: uuid(), title: 'Backlog', cards: [] },
+                    { id: uuid(), title: 'TODO', cards: [] },
+                    { id: uuid(), title: 'DOING', cards: [] },
+                    { id: uuid(), title: 'DONE', cards: [] },
+                ],
             };
             setBoards((state) => {
                 localStorage.setItem('todo-list', JSON.stringify(state.concat(data)));

@@ -1,16 +1,84 @@
-/* eslint-disable require-jsdoc */
-import React from 'react';
+import React, { useState } from 'react';
 
-interface ITileProps{
-    children: React.ReactNode;
+interface ItemProps{
+    id: string;
+    title: string;
+    removeItem: (id: string) => void;
+    editItem: (id: string, title: string) => void;
 }
 
-const Tile:React.FC<ITileProps> = ({ children }) => (
-    <div className="bg-white py-2 px-2 mb-2
-            transition-shadow shadow-lg rounded"
-    >
-        <p className="text-sm">{children}</p>
-    </div>
-);
+/**
+ * Task item
+ */
+export const Item:React.FC<ItemProps> = ({
+    id, title, removeItem, editItem,
+}) => {
+    const [showForm, setShowForm] = useState(false);
+    const [text, setText] = useState<string>(title || '');
 
-export default Tile;
+    return (
+        <div className="c-task-item">
+            {!showForm && (
+                <>
+                    <p className="c-task-item__title">
+                        { title }
+                    </p>
+                    <button
+                        className="c-task-item__edit"
+                        title="edit"
+                        onClick={ () => setShowForm(true) }
+                    >
+                        🖊️
+                    </button>
+                    <button
+                        className="c-task-item__remove"
+                        title="remove"
+                        onClick={ () => removeItem(id) }
+                    >
+                        &times;
+                    </button>
+                </>
+            )}
+            {showForm && (
+                <form
+                    onSubmit={ () => {
+                        editItem(id, text);
+                        setText(text);
+                        setShowForm(false);
+                    } }
+                    className="c-tasks__new-task"
+                >
+                    <textarea
+                        className="c-tasks__new-task__input"
+                        name="card-task"
+                        id="card-text"
+                        value={ text }
+                        onChange={ (e) => setText(e.target.value) }
+                        onKeyUp={ (event) => {
+                            if (event.key === 'Enter') {
+                                editItem(id, text);
+                                setText(text);
+                                setShowForm(false);
+                            }
+                        } }
+                    />
+                    <div className="c-tasks__new-task__button-wrapper">
+                        <button
+                            className="c-tasks__new-task__cancel"
+                            type="submit"
+                            onClick={ () => setShowForm(false) }
+                        >
+                            &times;
+                        </button>
+                        <button
+                            className="c-tasks__new-task__add-button"
+                            type="submit"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </form>
+            )}
+        </div>
+    );
+};
