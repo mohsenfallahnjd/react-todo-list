@@ -25,7 +25,7 @@ export const Home: React.FC = () => {
     /**
      * Handle stop adding new board
      */
-    const stopAddingNewBoard = () => {
+    const resetNewBoard = () => {
         setCreatingStatus(false);
         setCardTitle('');
     };
@@ -44,8 +44,21 @@ export const Home: React.FC = () => {
                 localStorage.setItem('todo-list', JSON.stringify(state.concat(data)));
                 return state.concat(data);
             });
-            stopAddingNewBoard();
+            resetNewBoard();
         }
+    };
+
+    /**
+     * Handle remove board
+     *
+     * @param {string} id - Board id
+     */
+    const removeBoard = (id: string) => {
+        setBoards((state) => {
+            const filteredList = state.filter((board: {[k:string]: any}) => board.id !== id);
+            localStorage.setItem('todo-list', JSON.stringify(filteredList));
+            return filteredList;
+        });
     };
 
     return (
@@ -57,7 +70,15 @@ export const Home: React.FC = () => {
 
             <div className="m-home__board-wrapper">
                 {
-                    boards.map((item: {[k:string]: any}) => <BoardCard data={ item } key={ item.id } />)
+                    boards.map(
+                        (item: {[k:string]: any}) => (
+                            <BoardCard
+                                data={ item }
+                                key={ item.id }
+                                removeBoard={ removeBoard }
+                            />
+                        ),
+                    )
                 }
 
                 <AddNewCard
@@ -65,7 +86,7 @@ export const Home: React.FC = () => {
                     changeCreatingStatus={ setCreatingStatus }
                     handleInputChange={ handleInputChange }
                     addNewBoard={ addNewBoard }
-                    stopAddingNewBoard={ stopAddingNewBoard }
+                    resetNewBoard={ resetNewBoard }
                 />
             </div>
 

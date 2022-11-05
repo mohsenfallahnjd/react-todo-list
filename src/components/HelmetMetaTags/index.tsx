@@ -7,7 +7,7 @@ interface HelmetMetaTagsProps {}
 // eslint-disable-next-line require-jsdoc
 export const HelmetMetaTags: React.FC<HelmetMetaTagsProps> = () => (
     <Helmet
-        titleTemplate={ `${Config.name}- %s` }
+        titleTemplate={ `${Config.name} | %s` }
         defaultTitle="Mohsen Fallahnejad"
         defer={ false }
     >

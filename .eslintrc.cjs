@@ -87,7 +87,8 @@ module.exports = {
         'import/no-extraneous-dependencies': 'off',
         'import/prefer-default-export'     : 'off',
 
-        'no-undef': 'off',
+        'no-undef'      : 'off',
+        'no-unused-vars': 'off',
 
         // React
         'react/prop-types'                   : 0,

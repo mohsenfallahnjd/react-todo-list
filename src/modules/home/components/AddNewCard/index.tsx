@@ -2,17 +2,19 @@ import React from 'react';
 
 interface AddNewCardProps {
     creatingStatus: boolean;
-    stopAddingNewBoard: () => void;
     addNewBoard: () => void;
-    // eslint-disable-next-line no-unused-vars
-    handleInputChange: (e: {[key: string]: any}) => void;
-    // eslint-disable-next-line no-unused-vars
+    resetNewBoard: () => void;
     changeCreatingStatus: (e: boolean) => void;
+    handleInputChange: (e: {[key: string]: any}) => void;
 }
 
 // eslint-disable-next-line require-jsdoc
 export const AddNewCard: React.FC<AddNewCardProps> = ({
-    addNewBoard, stopAddingNewBoard, handleInputChange, creatingStatus, changeCreatingStatus,
+    creatingStatus,
+    addNewBoard,
+    resetNewBoard,
+    changeCreatingStatus,
+    handleInputChange,
 }) => (
     <div className="c-board-card-wrapper">
         <div className="c-board-card c-board-card--new">
@@ -35,7 +37,7 @@ export const AddNewCard: React.FC<AddNewCardProps> = ({
                             <div>
                                 <button
                                     className="c-board-card__button c-board-card__button--add"
-                                    onClick={ stopAddingNewBoard }
+                                    onClick={ resetNewBoard }
                                 >
                                     Cancel
                                 </button>
